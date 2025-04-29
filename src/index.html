@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deutsches Vokabelspiel</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="scoreboard">
+        <span class="correct-score">
+            <span class="label">Richtig:</span> 
+            <span class="score" id="correct-score">0</span>
+        </span>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <span class="incorrect-score">
+            <span class="label">Falsch:</span> 
+            <span class="score" id="incorrect-score">0</span>
+        </span>
+    </div>
+    <h1>Deutsches Vokabelspiel</h1>
+    <div class="columns">
+        <div class="column blue" id="der-column" ondrop="drop(event, 'der', this)" ondragover="allowDrop(event)">
+            <h2>Der (masculine)</h2>
+            <ul class="corrected-vocabulary-list"></ul>
+        </div>
+        
+        <div class="column green" id="das-column" ondrop="drop(event, 'das', this)" ondragover="allowDrop(event)">
+            <h2>Das (neuter)</h2>
+            <ul class="corrected-vocabulary-list"></ul>
+        </div>
+
+        <div class="column red" id="die-column" ondrop="drop(event, 'die', this)" ondragover="allowDrop(event)">
+            <h2>Die (feminine)</h2>
+            <ul class="corrected-vocabulary-list"></ul>
+        </div>
+    </div>
+    <ul id="vocabulary-list" class="vocabulary-list"></ul>
+    <script src="scripts/app.js"></script>
+</body>
+</html>
