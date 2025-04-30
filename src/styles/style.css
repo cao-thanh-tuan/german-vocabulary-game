@@ -15,11 +15,11 @@ h1 {
     width: 30%;
     min-height: 300px; /* Minimum height for the column */
     height: auto; /* Allow auto-expanding height */
-    margin: 10px;
+    margin: 5px;
     display: inline-block;
     vertical-align: top;
     border-radius: 5px;
-    padding: 10px;
+    padding: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -140,24 +140,33 @@ h1 {
 /* Responsive Design */
 @media (max-width: 768px) {
     .column {
-        width: 100%; /* Make columns stack vertically */
-        margin: 10px 0;
+        width: 31.5%; /* Make columns smaller to fit in the same row */
+        margin: 2px; /* Reduce margin for better spacing */
+        display: inline-block; /* Ensure columns stay in the same row */
+        vertical-align: top;
+        padding: 1px;
+        min-height: 200px; /* Minimum height for the column */
     }
 
     .vocabulary-item {
-        flex: 1 1 calc(50% - 10px); /* Adjust to fit 2 items per row */
-        max-width: calc(50% - 10px);
+        flex: 1 1 calc(32% - 5px); /* Adjust to fit smaller items */
+        max-width: calc(32% - 5px); /* Ensure items fit within the columns */
         font-size: 14px; /* Reduce font size for smaller screens */
+        padding: 5px;
     }
 
     .corrected-vocabulary-item {
-        flex: 1 1 calc(100% - 10px); /* Adjust to fit 1 item per row */
-        max-width: calc(100% - 10px);
+        flex: 1 1 calc(90% - 10px); /* Adjust to fit within the smaller columns */
+        max-width: calc(90% - 10px);
         font-size: 14px; /* Reduce font size for smaller screens */
     }
 
     h1 {
         font-size: 24px; /* Reduce heading size for tablets */
+    }
+
+    .column h2 {
+        font-size: 15px;
     }
 
     .scoreboard {
@@ -166,13 +175,23 @@ h1 {
 }
 
 @media (max-width: 480px) {
+    .column {
+        width: 30%; /* Keep columns in the same row */
+        margin: 2px; /* Reduce margin for better spacing */
+        padding: 1px;
+        min-height: 200px; /* Minimum height for the column */
+    }
+
     .vocabulary-item {
-        flex: 1 1 calc(100% - 10px); /* Adjust to fit 1 item per row */
-        max-width: calc(100% - 10px);
+        flex: 1 1 calc(32% - 5px); /* Adjust to fit smaller items */
+        max-width: calc(32% - 5px); /* Ensure items fit within the columns */
         font-size: 12px; /* Further reduce font size for mobile screens */
+        padding: 5px;
     }
 
     .corrected-vocabulary-item {
+        flex: 1 1 calc(90% - 10px); /* Adjust to fit within the smaller columns */
+        max-width: calc(90% - 10px);
         font-size: 12px; /* Further reduce font size for mobile screens */
     }
 
