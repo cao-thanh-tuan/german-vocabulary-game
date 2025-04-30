@@ -89,8 +89,13 @@ const LearningVocabulary = [
     { word: "Kino", article: "das", meaning: "cinema" },
     { word: "Baby", article: "das", meaning: "baby" },
     { word: "Internet", article: "das", meaning: "internet" },
+    { word: "Entwickler", article: "der", meaning: "developer" },
 ];
 
+let correctScore = 0;
+let incorrectScore = 0;
+let vocabulary = [];
+let learnMoreVocabulary = [];
 
 async function GetVocabularyFromAI() {
     try {
@@ -122,9 +127,6 @@ async function GetVocabularyFromAI() {
         return [];
     }
 }
-
-let correctScore = 0;
-let incorrectScore = 0;
 
 function updateScore() {
     $("#correct-score").text(correctScore);
@@ -159,9 +161,14 @@ function drop(event, article, column) {
         const $ul = $(column).find("ul");
         
         // Append the word to the correct $ul in the column
-        const $li = $("<li>")
+        let $li = $("<li>")
             .text(word)
             .addClass("corrected-vocabulary-item");
+
+        if (learnMoreVocabulary.includes(word)) {
+            $li.addClass("learn-more-vocabulary-item");
+        }
+
         $ul.append($li);
 
         // Remove the word from the vocabulary list
@@ -170,6 +177,7 @@ function drop(event, article, column) {
         correctScore++;
     } else {
         incorrectScore++;
+        learnMoreVocabulary.push(word);
     }
 
     updateScore();
@@ -192,11 +200,9 @@ function createVocabularyList() {
     });
 }
 
-var vocabulary = [];
-
 (async () => {
     //Call an AI Api to gernerate another list of vocabulary and then build a AILearningVocabulary array
-    const AILearningVocabulary = await GetVocabularyFromAI();
+    const AILearningVocabulary = [];//await GetVocabularyFromAI();
 
     // check if AILearningVocabulary is not empty
     if (AILearningVocabulary && AILearningVocabulary.length > 0) {

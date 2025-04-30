@@ -109,6 +109,10 @@ h1 {
     margin: 5px;
 }
 
+.learn-more-vocabulary-item {
+    color: #f01e1e; /* highlight items need to learn more */
+}
+
 .scoreboard {
     display: flex;
     justify-content: flex-end;
@@ -131,4 +135,53 @@ h1 {
 
 .scoreboard .incorrect-score .score {
     color: red; /* Red for incorrect score */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .column {
+        width: 100%; /* Make columns stack vertically */
+        margin: 10px 0;
+    }
+
+    .vocabulary-item {
+        flex: 1 1 calc(50% - 10px); /* Adjust to fit 2 items per row */
+        max-width: calc(50% - 10px);
+        font-size: 14px; /* Reduce font size for smaller screens */
+    }
+
+    .corrected-vocabulary-item {
+        flex: 1 1 calc(100% - 10px); /* Adjust to fit 1 item per row */
+        max-width: calc(100% - 10px);
+        font-size: 14px; /* Reduce font size for smaller screens */
+    }
+
+    h1 {
+        font-size: 24px; /* Reduce heading size for tablets */
+    }
+
+    .scoreboard {
+        font-size: 14px; /* Reduce font size for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .vocabulary-item {
+        flex: 1 1 calc(100% - 10px); /* Adjust to fit 1 item per row */
+        max-width: calc(100% - 10px);
+        font-size: 12px; /* Further reduce font size for mobile screens */
+    }
+
+    .corrected-vocabulary-item {
+        font-size: 12px; /* Further reduce font size for mobile screens */
+    }
+
+    h1 {
+        font-size: 20px; /* Further reduce heading size for mobile */
+    }
+
+    .scoreboard {
+        font-size: 12px; /* Further reduce font size for smaller screens */
+        justify-content: center; /* Center the scoreboard */
+    }
 }
