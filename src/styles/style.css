@@ -148,17 +148,31 @@ h1 {
         min-height: 200px; /* Minimum height for the column */
     }
 
+    .column h2 {
+        margin-bottom: 0px;
+    }
+
+    .corrected-vocabulary-list {
+        gap: 0px; /* remove space between items */
+    }
+
     .vocabulary-item {
         flex: 1 1 calc(32% - 5px); /* Adjust to fit smaller items */
         max-width: calc(32% - 5px); /* Ensure items fit within the columns */
         font-size: 14px; /* Reduce font size for smaller screens */
         padding: 5px;
+        height: 35px; /* Fixed height for items */
     }
 
     .corrected-vocabulary-item {
         flex: 1 1 calc(90% - 10px); /* Adjust to fit within the smaller columns */
         max-width: calc(90% - 10px);
         font-size: 14px; /* Reduce font size for smaller screens */
+        height: 30px; /* Fixed height for items */
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: 6px;
     }
 
     h1 {
@@ -182,17 +196,36 @@ h1 {
         min-height: 200px; /* Minimum height for the column */
     }
 
+    .column h2 {
+        margin-bottom: 0px;
+    }
+
+    .explanation {
+        /* hiden its*/
+        display: none;
+    }
+
+    .corrected-vocabulary-list {
+        gap: 0px; /* remove space between items */
+    }
+
     .vocabulary-item {
         flex: 1 1 calc(32% - 5px); /* Adjust to fit smaller items */
         max-width: calc(32% - 5px); /* Ensure items fit within the columns */
         font-size: 12px; /* Further reduce font size for mobile screens */
         padding: 5px;
+        height: 35px; /* Fixed height for items */
     }
 
     .corrected-vocabulary-item {
         flex: 1 1 calc(90% - 10px); /* Adjust to fit within the smaller columns */
         max-width: calc(90% - 10px);
         font-size: 12px; /* Further reduce font size for mobile screens */
+        height: 30px; /* Fixed height for items */
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: 6px;
     }
 
     h1 {
