@@ -201,24 +201,29 @@ function playWord(wordObj, numberOfTimes = 1) {
         return;
     }
 
-    // combine word and article from the word object into a string
+    // Combine word and article from the word object into a string
     const word = `${wordObj.article} ${wordObj.word}`;
-    const language = 'de'; 
+    const language = 'de';
 
     // Google Translate TTS URL (unofficial)
     const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=${language}&client=tw-ob`;
 
-    const audio = new Audio(url);
-
     // Play the audio numberOfTimes asynchronously with a 1-second delay between each play
-    (async () => {
+    const playAudio = async () => {
         for (let i = 0; i < numberOfTimes; i++) {
-            const audioClone = new Audio(url); // Create a new Audio instance for each play
-            await audioClone.play();
-            // Delay 1 second before the next play
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            const audio = new Audio(url); // Create a new Audio instance for each play
+            try {
+                await audio.play();
+                // Delay 1.5 seconds before the next play
+                await new Promise(resolve => setTimeout(resolve, 1500));
+            } catch (error) {
+                console.error("Audio playback failed:", error);
+            }
         }
-    })();
+    };
+
+    // Ensure the function is called after a user interaction
+    playAudio();
 }
 
 function createVocabularyList() {
