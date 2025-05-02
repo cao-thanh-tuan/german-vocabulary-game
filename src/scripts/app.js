@@ -137,7 +137,6 @@ function checkCompletion() {
     if (correctScore === vocabulary.length) {
         const percentage = ((correctScore - incorrectScore) / vocabulary.length) * 100;
         alert(`Spiel beendet! Deine Punktzahl: ${percentage}%`);
-        location.reload();
     }
 }
 
@@ -155,6 +154,7 @@ function drop(event, article, column) {
         
     const word = event.originalEvent.dataTransfer.getData("text");
     const wordObj = vocabulary.find(item => item.word === word);
+    let playwordNumber = 1;
 
     if (wordObj.article === article) {
         // find ul element in the column
@@ -167,6 +167,7 @@ function drop(event, article, column) {
 
         if (learnMoreVocabulary.includes(word)) {
             $li.addClass("learn-more-vocabulary-item");
+            playwordNumber += 1;
         }
 
         $ul.append($li);
@@ -175,6 +176,11 @@ function drop(event, article, column) {
         $("#vocabulary-list li").filter((_, el) => $(el).text() === word).remove();
 
         correctScore++;
+
+        // Play the word asynchronously
+        setTimeout(() => {
+            playWord(wordObj, playwordNumber);
+        }, 0);
     } else {
         incorrectScore++;
         learnMoreVocabulary.push(word);
@@ -186,6 +192,37 @@ function drop(event, article, column) {
     setTimeout(() => {
         checkCompletion();
     }, 0);
+}
+
+function playWord(wordObj, numberOfTimes = 1) {
+    // Check if the word object is valid
+    if (!wordObj || !wordObj.word) {
+        console.error("Invalid word object");
+        return;
+    }
+
+    // combine word and article from the word object into a string
+    const word = `${wordObj.article} ${wordObj.word}`;
+    const language = 'de'; 
+
+    // Google Translate TTS URL (unofficial)
+    const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=${language}&client=tw-ob`;
+
+    const audio = new Audio(url);
+
+    // Play the audio numberOfTimes asynchronously with a 1-second delay between each play
+    (async () => {
+        for (let i = 0; i < numberOfTimes; i++) {
+            try {
+                const audioClone = new Audio(url); // Create a new Audio instance for each play
+                await audioClone.play();
+            } catch (error) {
+                console.error("Error playing audio:", error);
+            }
+            // Delay 1 second before the next play
+            await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+    })();
 }
 
 function createVocabularyList() {

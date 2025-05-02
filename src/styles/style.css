@@ -137,6 +137,31 @@ h1 {
     color: red; /* Red for incorrect score */
 }
 
+.new-game-container {
+    display: flex;
+    justify-content: center; /* Center the button horizontally */
+    margin-top: 20px; /* Add spacing above the button */
+    align-items: center; /* Center the button vertically */
+}
+
+.new-game-button {
+    background-color: #ffa500; /* Orange background */
+    color: white; /* White text */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold; 
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.new-game-button:hover {
+    background-color: #ff8c00; /* Darker orange on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .column {
@@ -185,6 +210,10 @@ h1 {
 
     .scoreboard {
         font-size: 14px; /* Reduce font size for smaller screens */
+    }
+
+    .new-game-button {
+        font-size: 14px;
     }
 }
 
@@ -235,5 +264,9 @@ h1 {
     .scoreboard {
         font-size: 12px; /* Further reduce font size for smaller screens */
         justify-content: center; /* Center the scoreboard */
+    }
+
+    .new-game-button {
+        font-size: 12px;
     }
 }
