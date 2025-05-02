@@ -4,37 +4,6 @@ let incorrectScore = 0;
 let vocabulary = [];
 let learnMoreVocabulary = [];
 
-async function GetVocabularyFromAI() {
-    try {
-        const response = await fetch("https://api.openai.com/v1/chat/completions", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer sk-xxxxxxxxxxxxxxxxxxxx`
-            },
-            body: JSON.stringify({
-                model: "gpt-3.5-turbo",
-                messages: [
-                    { role: "user", content: "Generate a list of 25 German vocabulary words with their articles and meanings at A1, A2 level." }
-                ],
-                max_tokens: 150,
-                temperature: 0.7
-            })
-        });
-
-        const data = await response.json();
-        const vocabularyList = data.choices[0].text.trim().split("\n").map(line => {
-            const [article, word, meaning] = line.split(" - ");
-            return { word: word.trim(), article: article.trim(), meaning: meaning.trim() };
-        });
-
-        return vocabularyList;
-    } catch (error) {
-        console.error("Error fetching vocabulary from AI API:", error);
-        return [];
-    }
-}
-
 function updateScore() {
     $("#correct-score").text(correctScore);
     $("#incorrect-score").text(incorrectScore);
@@ -44,6 +13,18 @@ function checkCompletion() {
     if (correctScore === vocabulary.length) {
         const percentage = ((correctScore - incorrectScore) / vocabulary.length) * 100;
         alert(`Spiel beendet! Deine Punktzahl: ${percentage}%`);
+
+        // Load stored challenging words
+        const storedChallengingWords = JSON.parse(localStorage.getItem("challengingWords") || "[]");
+
+        // remove words in vocabulary from storedChallengingWords
+        const filteredChallengingWords = storedChallengingWords.filter(word => !vocabulary.some(item => item.word === word));
+
+        // Merge current learnMoreVocabulary with storedChallengingWords
+        const updatedChallengingWords = [...new Set([...filteredChallengingWords, ...learnMoreVocabulary])];
+
+        // Save updated challenging words to localStorage
+        localStorage.setItem("challengingWords", JSON.stringify(updatedChallengingWords));
     }
 }
 
@@ -151,22 +132,26 @@ function createVocabularyList() {
     });
 }
 
-(async () => {
-    //Call an AI Api to gernerate another list of vocabulary and then build a AILearningVocabulary array
-    const AILearningVocabulary = [];//await GetVocabularyFromAI();
+function loadChallengingWords() {
+    const storedChallengingWords = JSON.parse(localStorage.getItem("challengingWords") || "[]");
+    storedChallengingWords.forEach(word => {
+        const wordObj = LearningVocabulary.find(item => item.word === word);
+        if (wordObj && !vocabulary.includes(wordObj)) {
+            vocabulary.push(wordObj);
+        }
+    });
+}
 
-    // check if AILearningVocabulary is not empty
-    if (AILearningVocabulary && AILearningVocabulary.length > 0) {
-        // assign the AILearningVocabulary to the vocabulary array
-        vocabulary = vocabulary.concat(AILearningVocabulary);
-    } else {
-        // randomly and pickup vocabularyNumberInEachGame vocabulary from vacabulary array into anoter array
-        while (vocabulary.length < vocabularyNumberInEachGame) {
-            const randomIndex = Math.floor(Math.random() * LearningVocabulary.length);
-            const randomWord = LearningVocabulary[randomIndex];
-            if (!vocabulary.includes(randomWord)) {
-                vocabulary.push(randomWord);
-            }
+(async () => {
+    // Load challenging words from localStorage
+    loadChallengingWords();
+
+    // randomly and pickup vocabularyNumberInEachGame vocabulary from vacabulary array into anoter array
+    while (vocabulary.length < vocabularyNumberInEachGame) {
+        const randomIndex = Math.floor(Math.random() * LearningVocabulary.length);
+        const randomWord = LearningVocabulary[randomIndex];
+        if (!vocabulary.includes(randomWord)) {
+            vocabulary.push(randomWord);
         }
     }
 
