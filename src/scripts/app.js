@@ -1,3 +1,4 @@
+let vocabularyNumberInEachGame = 25;
 let correctScore = 0;
 let incorrectScore = 0;
 let vocabulary = [];
@@ -159,8 +160,8 @@ function createVocabularyList() {
         // assign the AILearningVocabulary to the vocabulary array
         vocabulary = vocabulary.concat(AILearningVocabulary);
     } else {
-        // randomly and pickup 25 vocabularies from vacabulary array into anoter array
-        while (vocabulary.length < 25) {
+        // randomly and pickup vocabularyNumberInEachGame vocabulary from vacabulary array into anoter array
+        while (vocabulary.length < vocabularyNumberInEachGame) {
             const randomIndex = Math.floor(Math.random() * LearningVocabulary.length);
             const randomWord = LearningVocabulary[randomIndex];
             if (!vocabulary.includes(randomWord)) {
