@@ -203,27 +203,33 @@ function playWord(wordObj, numberOfTimes = 1) {
 
     // Combine word and article from the word object into a string
     const word = `${wordObj.article} ${wordObj.word}`;
-    const language = 'de';
 
-    // Google Translate TTS URL (unofficial)
-    const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=${language}&client=tw-ob`;
+    const voices = speechSynthesis.getVoices();
+    const germanVoice = voices.find(v => v.name.includes('Google') && v.lang === 'de-DE') ||
+                        voices.find(v => v.name.includes('Hedda') && v.lang === 'de-DE') ||
+                        voices.find(v => v.name === 'Anna' && v.lang === 'de-DE') ||
+                        voices.find(v => v.lang === 'de-DE');
 
-    // Play the audio numberOfTimes asynchronously with a 1-second delay between each play
-    const playAudio = async () => {
-        for (let i = 0; i < numberOfTimes; i++) {
-            const audio = new Audio(url); // Create a new Audio instance for each play
-            try {
-                await audio.play();
-                // Delay 1.5 seconds before the next play
-                await new Promise(resolve => setTimeout(resolve, 1500));
-            } catch (error) {
-                console.error("Audio playback failed:", error);
-            }
-        }
+    // Function to play the word a specific number of times
+    const playAudio = (count) => {
+        if (count <= 0) return; // Stop when repetitions are complete
+
+        const utterance = new SpeechSynthesisUtterance(word);
+        utterance.lang = 'de'; // German language
+        utterance.voice = germanVoice;
+
+        // Play the word and schedule the next repetition
+        utterance.onend = () => {
+            setTimeout(() => {
+                playAudio(count - 1); // Decrement the count and play again
+            }, 1200); // 1.5-second delay between repetitions
+        };
+
+        speechSynthesis.speak(utterance);
     };
 
-    // Ensure the function is called after a user interaction
-    playAudio();
+    // Start playing the word
+    playAudio(numberOfTimes);
 }
 
 function createVocabularyList() {
