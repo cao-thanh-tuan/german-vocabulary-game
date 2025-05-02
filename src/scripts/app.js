@@ -213,14 +213,10 @@ function playWord(wordObj, numberOfTimes = 1) {
     // Play the audio numberOfTimes asynchronously with a 1-second delay between each play
     (async () => {
         for (let i = 0; i < numberOfTimes; i++) {
-            try {
-                const audioClone = new Audio(url); // Create a new Audio instance for each play
-                await audioClone.play();
-            } catch (error) {
-                console.error("Error playing audio:", error);
-            }
+            const audioClone = new Audio(url); // Create a new Audio instance for each play
+            await audioClone.play();
             // Delay 1 second before the next play
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise(resolve => setTimeout(resolve, 1500));
         }
     })();
 }
