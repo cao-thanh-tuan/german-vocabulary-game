@@ -103,7 +103,7 @@ function showTooltip(item, text) {
     });
 
     // Remove the tooltip after a short delay
-    setTimeout(() => $tooltip.fadeOut(300, () => $tooltip.remove()), 2000);
+    setTimeout(() => $tooltip.fadeOut(300, () => $tooltip.remove()), 1000);
 }
 
 function playWord(wordObj) {

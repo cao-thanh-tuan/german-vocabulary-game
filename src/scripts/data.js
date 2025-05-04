@@ -34,9 +34,9 @@ const LearningVocabulary = [
     
     { word: "Frau", article: "die", meaning: "woman" },
     { word: "Mutter", article: "die", meaning: "mother" },
-    { word: "Freundin", article: "die", meaning: "female friend" },
-    { word: "Lehrerin", article: "die", meaning: "female teacher" },
-    { word: "Ärztin", article: "die", meaning: "female doctor" },
+    { word: "Freundin", article: "die", meaning: "friend" },
+    { word: "Lehrerin", article: "die", meaning: "teacher" },
+    { word: "Ärztin", article: "die", meaning: "doctor" },
     { word: "Familie", article: "die", meaning: "family" },
     { word: "Schule", article: "die", meaning: "school" },
     { word: "Straße", article: "die", meaning: "street" },
@@ -100,7 +100,7 @@ const LearningVocabulary = [
 
     { word: "Student", article: "der", meaning: "university student" },
     { word: "Kellner", article: "der", meaning: "waiter" },
-    { word: "Nachbar", article: "der", meaning: "neighbor (male)" },
+    { word: "Nachbar", article: "der", meaning: "neighbor" },
     { word: "Vogel", article: "der", meaning: "bird" },
     { word: "Bleistift", article: "der", meaning: "pencil" },
     { word: "Kugelschreiber", article: "der", meaning: "ballpoint pen" },
@@ -153,7 +153,7 @@ const LearningVocabulary = [
     { word: "Wörterbuch", article: "das", meaning: "dictionary" },
     { word: "Beispiel", article: "das", meaning: "example" },
   
-    { word: "Kunde", article: "der", meaning: "customer (male)" },
+    { word: "Kunde", article: "der", meaning: "customer" },
     { word: "Besuch", article: "der", meaning: "visit" },
     { word: "Schrank", article: "der", meaning: "cabinet" },
     { word: "Sohn", article: "der", meaning: "son" },
@@ -174,4 +174,45 @@ const LearningVocabulary = [
     { word: "Programm", article: "das", meaning: "program" },
     { word: "System", article: "das", meaning: "system" },
     { word: "Maus", article: "die", meaning: "mouse" },
+
+    // Daily Life & House
+    { word: "Spiegel", article: "der", meaning: "mirror" },
+    { word: "Regal", article: "das", meaning: "shelf" },
+    { word: "Teppich", article: "der", meaning: "carpet" },
+    { word: "Decke", article: "die", meaning: "ceiling/blanket" },
+    { word: "Vorhang", article: "der", meaning: "curtain" },
+
+    // Time & Activities
+    { word: "Termin", article: "der", meaning: "appointment" },
+    { word: "Urlaub", article: "der", meaning: "vacation" },
+    { word: "Pause", article: "die", meaning: "break" },
+    { word: "Alltag", article: "der", meaning: "everyday life" },
+    { word: "Erinnerung", article: "die", meaning: "memory" },
+
+    // Relationships & Emotions
+    { word: "Chef", article: "der", meaning: "boss" },
+    { word: "Beziehung", article: "die", meaning: "relationship" },
+    { word: "Streit", article: "der", meaning: "argument" },
+    { word: "Meinung", article: "die", meaning: "opinion" },
+    { word: "Entscheidung", article: "die", meaning: "decision" },
+
+    // Work & Communication
+    { word: "Bewerbung", article: "die", meaning: "application" },
+    { word: "Gespräch", article: "das", meaning: "conversation/interview" },
+    { word: "Vertrag", article: "der", meaning: "contract" },
+    { word: "Erfahrung", article: "die", meaning: "experience" },
+    { word: "Möglichkeit", article: "die", meaning: "possibility" },
+
+    // Abstract Concepts
+    { word: "Ziel", article: "das", meaning: "goal" },
+    { word: "Zukunft", article: "die", meaning: "future" },
+    { word: "Angst", article: "die", meaning: "fear" },
+    { word: "Fehler", article: "der", meaning: "mistake" },
+    { word: "Glück", article: "das", meaning: "luck/happiness" },
+
+    // Tech & Digital
+    { word: "Netzwerk", article: "das", meaning: "network" },
+    { word: "Passwort", article: "das", meaning: "password" },
+    { word: "Webseite", article: "die", meaning: "website" },
+    { word: "Zugang", article: "der", meaning: "access" },
 ];
