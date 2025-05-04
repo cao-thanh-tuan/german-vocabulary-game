@@ -83,11 +83,6 @@ h1 {
     transform: scale(1.02); /* Slight zoom effect on hover */
 }
 
-.vocabulary-item.selected {
-    background-color: #ffa500; /* Orange for selected items */
-    color: white;
-}
-
 .corrected-vocabulary-list {
     display: flex;
     flex-wrap: wrap; /* Allow items to wrap to the next row */
@@ -116,6 +111,11 @@ h1 {
     color: #333; /* Text color */
     font-weight: bold; /* Bold text */
     margin: 5px;
+}
+
+.corrected-vocabulary-item:hover {
+    background-color: #e6e787; /* Slightly darker background on hover */
+    transform: scale(1.02); /* Slight zoom effect on hover */
 }
 
 .learn-more-vocabulary-item {
@@ -175,7 +175,7 @@ h1 {
 @media (max-width: 768px) {
     .column {
         width: 31.5%; /* Make columns smaller to fit in the same row */
-        margin: 2px; /* Reduce margin for better spacing */
+        margin: 3px; /* Reduce margin for better spacing */
         display: inline-block; /* Ensure columns stay in the same row */
         vertical-align: top;
         padding: 1px;
@@ -230,7 +230,7 @@ h1 {
 @media (max-width: 480px) {
     .column {
         width: 30%; /* Keep columns in the same row */
-        margin: 2px; /* Reduce margin for better spacing */
+        margin: 3px; /* Reduce margin for better spacing */
         padding: 1px;
         min-height: 200px; /* Minimum height for the column */
     }

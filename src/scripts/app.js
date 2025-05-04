@@ -39,23 +39,22 @@ function drag(event) {
 function drop(event, article, column) {
     event.preventDefault();
     if (!event.originalEvent) return;
-        
+
     const word = event.originalEvent.dataTransfer.getData("text");
     const wordObj = vocabulary.find(item => item.word === word);
-    let playwordNumber = 1;
 
     if (wordObj.article === article) {
-        // find ul element in the column
         const $ul = $(column).find("ul");
-        
-        // Append the word to the correct $ul in the column
+
         let $li = $("<li>")
             .text(word)
-            .addClass("corrected-vocabulary-item");
+            .addClass("corrected-vocabulary-item")
+            .on("click", function () {
+                playWord(wordObj);
+            });
 
         if (learnMoreVocabulary.includes(word)) {
             $li.addClass("learn-more-vocabulary-item");
-            playwordNumber += 1;
         }
 
         $ul.append($li);
@@ -67,22 +66,23 @@ function drop(event, article, column) {
 
         // Play the word asynchronously
         setTimeout(() => {
-            playWord(wordObj, playwordNumber);
+            playWord(wordObj);
         }, 0);
     } else {
         incorrectScore++;
-        learnMoreVocabulary.push(word);
+        if (!learnMoreVocabulary.includes(word)) {
+            learnMoreVocabulary.push(word);
+        }
     }
 
     updateScore();
 
-    // Delay the checkCompletion call to ensure the UI is updated
     setTimeout(() => {
         checkCompletion();
     }, 0);
 }
 
-function playWord(wordObj, numberOfTimes = 1) {
+function playWord(wordObj) {
     // Check if the word object is valid
     if (!wordObj || !wordObj.word) {
         console.error("Invalid word object");
@@ -98,26 +98,13 @@ function playWord(wordObj, numberOfTimes = 1) {
                         voices.find(v => v.name === 'Anna' && v.lang === 'de-DE') ||
                         voices.find(v => v.lang === 'de-DE');
 
-    // Function to play the word a specific number of times
-    const playAudio = (count) => {
-        if (count <= 0) return; // Stop when repetitions are complete
+    
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = 'de'; // German language
+    utterance.voice = germanVoice;
 
-        const utterance = new SpeechSynthesisUtterance(word);
-        utterance.lang = 'de'; // German language
-        utterance.voice = germanVoice;
-
-        // Play the word and schedule the next repetition
-        utterance.onend = () => {
-            setTimeout(() => {
-                playAudio(count - 1); // Decrement the count and play again
-            }, 1200); // 1.5-second delay between repetitions
-        };
-
-        speechSynthesis.speak(utterance);
-    };
-
-    // Start playing the word
-    playAudio(numberOfTimes);
+    // Play the word
+    speechSynthesis.speak(utterance);
 }
 
 function createVocabularyList() {
