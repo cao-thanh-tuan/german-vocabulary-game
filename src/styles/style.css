@@ -11,6 +11,14 @@ h1 {
     text-align: center;
 }
 
+.columns {
+    display: flex;
+    max-width: 100%;
+    margin: auto;
+    justify-content: center; /* Align all columns in the center */
+    flex-wrap: wrap; /* Allow wrapping to the next row if needed */
+}
+
 .column {
     width: 30%;
     min-height: 300px; /* Minimum height for the column */
@@ -45,6 +53,7 @@ h1 {
     flex-wrap: wrap; /* Allow items to wrap to the next row */
     gap: 10px; /* Add space between items */
     overflow-x: auto; /* Enable horizontal scrolling if items overflow */
+    justify-content: center; /* Align all columns in the center */
     list-style: none;
     padding: 10px;
     margin: 0;
@@ -190,8 +199,8 @@ h1 {
     }
 
     .corrected-vocabulary-item {
-        flex: 1 1 calc(90% - 10px); /* Adjust to fit within the smaller columns */
-        max-width: calc(90% - 10px);
+        flex: 1 1 calc(100% - 5px); /* Adjust to fit within the smaller columns */
+        max-width: calc(100% - 5px);
         font-size: 14px; /* Reduce font size for smaller screens */
         height: 30px; /* Fixed height for items */
         margin-left: auto;
@@ -248,8 +257,8 @@ h1 {
     }
 
     .corrected-vocabulary-item {
-        flex: 1 1 calc(90% - 10px); /* Adjust to fit within the smaller columns */
-        max-width: calc(90% - 10px);
+        flex: 1 1 calc(100% - 2px); /* Adjust to fit within the smaller columns */
+        max-width: calc(100% - 2px);
         font-size: 12px; /* Further reduce font size for mobile screens */
         height: 30px; /* Fixed height for items */
         margin-left: auto;
