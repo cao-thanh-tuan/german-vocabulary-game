@@ -171,6 +171,20 @@ h1 {
     transform: scale(1.05); /* Slight zoom effect */
 }
 
+.tooltip {
+    position: absolute;
+    background-color: #555; /* Softer dark gray for better contrast */
+    color: #f9f9f9; /* Slightly off-white for a softer look */
+    padding: 6px 12px; /* Slightly larger padding for better readability */
+    border-radius: 6px; /* Slightly more rounded corners */
+    font-size: 14px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Softer shadow for a subtle effect */
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .column {
@@ -279,5 +293,21 @@ h1 {
     .new-game-button {
         font-size: 12px;
         background-color: #ffa500;
+    }
+}
+
+/* Tooltip for desktop mode */
+@media (min-width: 768px) {
+    .tooltip {
+        font-size: 13px;
+        padding: 5px 10px;
+    }
+}
+
+/* Tooltip for mobile mode */
+@media (max-width: 767px) {
+    .tooltip {
+        font-size: 11px;
+        padding: 8px 12px;
     }
 }

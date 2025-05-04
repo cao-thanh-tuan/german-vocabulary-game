@@ -49,8 +49,8 @@ function drop(event, article, column) {
         let $li = $("<li>")
             .text(word)
             .addClass("corrected-vocabulary-item")
-            .attr("title", wordObj.meaning) // Add tooltip text
-            .on("click", function () {
+            .on("click", function (event) {
+                showTooltip(this, wordObj.meaning);
                 playWord(wordObj);
             });
 
@@ -81,6 +81,29 @@ function drop(event, article, column) {
     setTimeout(() => {
         checkCompletion();
     }, 0);
+}
+
+function showTooltip(item, text) {
+    // Remove any existing tooltip
+    $(".tooltip").remove();
+
+    // Create a tooltip element
+    const $tooltip = $("<div>")
+        .addClass("tooltip")
+        .text(text);
+
+    // Append the tooltip to the body
+    $("body").append($tooltip);
+
+    // Position the tooltip near the clicked item
+    const offset = $(item).offset();
+    $tooltip.css({
+        top: offset.top - $tooltip.outerHeight() - 10 + "px",
+        left: offset.left + "px"
+    });
+
+    // Remove the tooltip after a short delay
+    setTimeout(() => $tooltip.fadeOut(300, () => $tooltip.remove()), 2000);
 }
 
 function playWord(wordObj) {
@@ -114,8 +137,10 @@ function createVocabularyList() {
             .text(item.word)
             .addClass("vocabulary-item")
             .attr("draggable", true)
-            .attr("title", item.meaning)
-            .on("dragstart", drag);
+            .on("dragstart", drag)
+            .on("click", function (event) {
+                showTooltip(this, item.meaning);
+            });
         $("#vocabulary-list").append($li);
     });
 }
