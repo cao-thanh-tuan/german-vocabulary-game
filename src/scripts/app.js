@@ -49,6 +49,7 @@ function drop(event, article, column) {
         let $li = $("<li>")
             .text(word)
             .addClass("corrected-vocabulary-item")
+            .attr("title", wordObj.meaning) // Add tooltip text
             .on("click", function () {
                 playWord(wordObj);
             });
